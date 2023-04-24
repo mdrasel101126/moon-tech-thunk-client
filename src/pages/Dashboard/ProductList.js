@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import loadProductData from "../../redux/reducers/thunk/products/fetchProducts";
+import removeProductData from "../../redux/reducers/thunk/products/removeProductData";
 
 const ProductList = () => {
   const products = useSelector((state) => state.product.products);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadProductData());
-  }, []);
+  }, [dispatch]);
   return (
     <div class="flex flex-col justify-center items-center h-full w-full ">
       <div class="w-full max-w-7xl mx-auto rounded-lg  bg-white shadow-lg border border-gray-200">
@@ -66,7 +67,7 @@ const ProductList = () => {
                   </td>
                   <td class="p-2">
                     <div class="flex justify-center">
-                      <button>
+                      <button onClick={() => dispatch(removeProductData(_id))}>
                         <svg
                           class="w-8 h-8 hover:text-blue-600 rounded-full hover:bg-gray-100 p-1"
                           fill="none"
